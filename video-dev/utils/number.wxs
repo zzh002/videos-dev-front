@@ -1,0 +1,10 @@
+var numberUtil = {
+  numberFormat: function (value) {
+    var v = parseInt(value)//强转Int，毕竟有可能返回是String类型的数字
+    return v.toFixed(1)
+  }
+}
+
+module.exports = {
+  numberFormat: numberUtil.numberFormat//暴露接口调用
+}

@@ -1,0 +1,4 @@
+/* pages/index/index.wxss */
+.txt-css {
+  margin-top: 150rpx;
+}

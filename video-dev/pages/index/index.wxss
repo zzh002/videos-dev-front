@@ -1,0 +1,126 @@
+.item-container {
+    position: relative;
+}
+
+.cover {
+    width: 100%;
+    height: 400rpx;
+    display: block; 
+}
+
+.back-img{
+    display: block; 
+    background-color: black;
+}
+
+.desc {
+    height: 100rpx;
+    margin-top: 1rpx;
+    margin-bottom: 10rpx;
+    display: flex;
+    align-items: center;
+}
+
+.desc .right {
+    display: flex;
+    width: 65%;
+    margin-left: 100rpx;
+    margin-top: 40rpx;
+    align-items: center;
+}
+
+.desc .faceName {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 35%;
+}
+
+.counts {
+  color: white;
+}
+
+.title {
+    font-size: 30rpx;
+    margin-top: 10rpx;
+    margin-left: 20rpx;
+    width: 600rpx;
+}
+
+.myface {
+    display: block;
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 30rpx;
+    margin-top: 10rpx;
+    margin-right: 20rpx;
+}
+
+.nickname {
+    font-size: 20rpx;
+    margin-top: 6rpx;
+    margin-right: 20rpx;
+    color: darkgray;
+}
+
+.footer {
+  display: flex;
+  height: 106rpx;
+  /* background: red; */
+  color: white;
+
+}
+
+.footer .left {
+  font-size: 50rpx;
+  margin-left: 50rpx;
+  margin-top: 10rpx;
+}
+
+.footer .center {
+  font-size: 50rpx;
+  margin-left: 250rpx;
+  margin-top: 10rpx;
+}
+.index1 {
+  font-size: 25rpx;
+}
+
+.index2 {
+  font-size: 25rpx;
+}
+
+.index3 {
+  margin-left: 12rpx;
+  font-size: 25rpx;
+}
+
+.footer .right {
+  font-size: 50rpx;
+  margin-left: 250rpx;
+  margin-top: 10rpx;
+}
+
+
+.dianzan {
+  display: flex;
+  
+  font-size: 50rpx;
+  width: 50%;
+}
+
+.pinglun {
+  display: flex;
+  
+  font-size: 50rpx;
+  width: 50%;
+}
+
+.counts {
+  font-size: 30rpx;
+  margin-top: 10rpx;
+}
+
+.background {
+  background: black;
+}
