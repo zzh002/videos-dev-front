@@ -11,7 +11,6 @@ Page({
     isVideo: [],
     number: 2,
     
-    
     screenWidth: 350,
     serverUrl: "",
 
@@ -44,7 +43,6 @@ Page({
     // 获取当前的分页数
     var page = me.data.page;
     me.getAllVideoList(page, isSaveRecord);
-
     
   },
 
@@ -116,18 +114,24 @@ Page({
 
 
   showVideoInfo: function (e) {
+    wx.showLoading({
+      title: '加载中...',
+    });
     var me = this;
     var videoList = me.data.videoList;
     var arrindex = e.target.dataset.arrindex;
     var focus = e.target.dataset.focus;
     var videoInfo = JSON.stringify(videoList[arrindex]);
-
+    wx.hideLoading();
     wx.navigateTo({
       url: '../videoinfo/videoinfo?videoInfo=' + videoInfo + '&focus=' + focus
     })
   },
 
   showPublisher: function (e) {
+    wx.showLoading({
+      title: '加载中...',
+    });
     var me = this;
     var videoList = me.data.videoList;
     var arrindex = e.target.dataset.arrindex;
@@ -136,7 +140,7 @@ Page({
     var user = app.getGlobalUserInfo();
 
     var realUrl = '../mine/mine#publisherId@' + videoInfo.userId;
-
+    wx.hideLoading();
     if (user == null || user == undefined || user == '') {
       wx.navigateTo({
         url: '../userLogin/login?redirectUrl=' + realUrl,
@@ -260,8 +264,12 @@ Page({
   },
 
   showMine: function () {
+    wx.showLoading({
+      title: '加载中...',
+    });
     var user = app.getGlobalUserInfo();
-
+    var me = this;
+    wx.hideLoading();
     if (user == null || user == undefined || user == '') {
       wx.navigateTo({
         url: '../userLogin/login',
@@ -279,7 +287,6 @@ Page({
     var user = app.getGlobalUserInfo();
 
     var realUrl = '../mine/mine';
-
     if (user == null || user == undefined || user == '') {
       wx.navigateTo({
         url: '../userLogin/login?redirectUrl=' + realUrl,
@@ -302,5 +309,26 @@ Page({
     }
   },
 
+  onPlay: function () {
+    var me = this;
+    var videoContext = wx.createVideoContext("indexVideo", me);
+    videoContext.play();
+  },
+
+  onPause: function () {
+    var me = this;
+    var videoContext = wx.createVideoContext("indexVideo", me);
+    videoContext.pause();
+  },
+
+  onShow: function () {
+    var me = this;
+    me.onPlay();
+  },
+
+  onHide: function () {
+    var me = this;
+    me.onPause();
+  },
 
 })

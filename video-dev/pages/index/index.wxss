@@ -13,6 +13,20 @@
     background-color: black;
 }
 
+.labelDesc {
+  color: white;
+  margin-bottom: 10rpx;
+  margin: 10rpx;
+  margin-left: 25rpx;
+  width: 700rpx;
+  height: 40rpx;
+  font-size: 30rpx;
+  text-align: center;
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  white-space: nowrap;  
+}
+
 .desc {
     height: 100rpx;
     margin-top: 1rpx;
@@ -23,8 +37,7 @@
 
 .desc .right {
     display: flex;
-    width: 65%;
-    margin-left: 100rpx;
+    width: 70%;
     margin-top: 40rpx;
     align-items: center;
 }
@@ -33,11 +46,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 35%;
+    width: 30%;
 }
 
 .counts {
-  color: white;
+  color: darkgray;
 }
 
 .title {
@@ -67,7 +80,7 @@
   display: flex;
   height: 106rpx;
   /* background: red; */
-  color: white;
+  color: darkgray;
 
 }
 
@@ -105,16 +118,28 @@
 .dianzan {
   display: flex;
   
-  font-size: 50rpx;
+  font-size: 60rpx;
   width: 50%;
 }
 
 .pinglun {
   display: flex;
   
-  font-size: 50rpx;
+  font-size: 60rpx;
   width: 50%;
 }
+
+.infoIcon1 {
+  height: 60rpx;
+  width: 80rpx;
+}
+
+.infoIcon2 {
+  height: 60rpx;
+  width: 80rpx;
+  margin-right: 30rpx;
+}
+
 
 .counts {
   font-size: 30rpx;

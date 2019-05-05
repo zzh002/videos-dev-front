@@ -11,6 +11,18 @@ page {
     justify-content: space-between;
 }
 
+.container-l {
+  display: flex;
+  flex-direction: row;
+}
+
+.playIcon {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 200rpx;
+  margin-top: 450rpx;
+}
+
 .container-me {
     margin-top: 350rpx;
     margin-left: 50rpx;
@@ -41,10 +53,33 @@ page {
     white-space: pre-wrap;
 }
 
+.audioIcon {
+  height: 45rpx;
+  width: 45rpx;
+  margin-left: 50rpx;
+  margin-top: 8rpx;
+}
+
+.scrolly {
+  display: flex;
+  flex-direction: row;
+}
+
+.scrollx{
+  width: 50%;
+  color: white;
+  height: 45rpx;
+  line-height: 45rpx;
+  margin-top: 15rpx;
+  margin-left: 15rpx;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
 .container-bottom {
     /* bottom: 10px;  */
     display: flex;
-    margin-top: 60rpx;
+    margin-top: 20rpx;
     margin-left: 50rpx;
     margin-right: 50rpx;
     /* margin-bottom: 10rpx; */

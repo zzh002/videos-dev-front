@@ -4,16 +4,16 @@
     <block wx:for="{{videoList}}" wx:key='item.id' class="item-container">
 
       <swiper-item>
-
-        <view style='width:{{screenWidth}}px;height:210px;' class='back-img'>
-          <video wx:if="{{isVideo[index]}}" src="{{serverUrl}}{{item.videoPath}}" style='width:{{screenWidth}}px;height:210px;' autoplay="{{true}}" loop="{{true}}" bindtap='showVideoInfo' data-arrindex='{{index}}'></video>
-          <image wx:if="{{!isVideo[index]}}" src="{{serverUrl}}{{item.coverPath}}" style='width:{{screenWidth}}px;height:210px;' mode="aspectFit" bindtap='videoPlay' data-arrindex='{{index}}'></image>
+        <view class='labelDesc'>{{videoList[index].videoDesc}}</view>
+        <view style='width:{{screenWidth}}px;height:180px;' class='back-img'>
+          <video id="indexVideo" wx:if="{{isVideo[index]}}" src="{{serverUrl}}{{item.videoPath}}" style='width:{{screenWidth}}px;height:180px;' autoplay="{{true}}" loop="{{true}}"  play-btn-position="center"></video>
+          <image wx:if="{{!isVideo[index]}}" src="{{serverUrl}}{{item.coverPath}}" style='width:{{screenWidth}}px;height:180px;' mode="aspectFit" bindtap='videoPlay' data-arrindex='{{index}}'></image>
         </view>
 
 
         <view class="desc">
           <view class="faceName" bindtap='showPublisher' data-arrindex='{{index}}'>
-            <image class='myface' src="{{serverUrl}}{{item.faceImage}}" data-arrindex='{{index}}'></image>
+            <image class='myface' src="{{item.faceImage}}" data-arrindex='{{index}}'></image>
             <view class="nickname" data-arrindex='{{index}}'>@{{item.nickname}}</view>
           </view>
           <view class='right'>
@@ -29,6 +29,8 @@
               <view class='counts' data-arrindex='{{index}}' data-focus='{{true}}' wx:if="{{item.commentCounts > 9999}}">{{numberUtil.numberFormat(item.commentCounts/10000)}}</view>
               <view class='counts' data-arrindex='{{index}}' data-focus='{{true}}' wx:else>{{item.commentCounts}}</view>
             </view>
+            <image class='infoIcon1' src='../resource/images/video.png' bindtap='showVideoInfo' data-arrindex='{{index}}'></image>
+            <image class='infoIcon2' src='../resource/images/detail.png' bindtap='showVideoInfo' data-arrindex='{{index}}'></image>
           </view>
 
         </view>

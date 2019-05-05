@@ -1,52 +1,81 @@
-page {
-    background-color: whitesmoke;
+.login-container {
+  height: 100%;
+  padding: 10px 30px;
+  background: #fff;
 }
 
-.login-img {
-    width: 750rpx;
+.app-info {
+  position: relative;
+  padding: 20px;
+  text-align: center;
 }
 
-/*表单内容*/
-.inputView {
-    background-color: white;
-    line-height: 45px;
+.app-info:after {
+  content: " ";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 1px;
+  border-bottom: 1px solid #e5e5e5;
+  color: #e5e5e5;
+  -webkit-transform-origin: 0 100%;
+  transform-origin: 0 100%;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
 }
 
-/*输入框*/
-.nameImage, .keyImage {
-    margin-left: 22px;
-    width: 20px;
-    height: 20px;
+.app-info .app-logo {
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 10px auto;
+  border-radius: 4px;
 }
 
-.loginLabel {
-    margin: 15px 15px 15px 10px;
-    color: gray;
-    font-size: 15px;
+.app-info .app-name {
+  font-weight: bold;
+  font-size: 18px;
+  color: #000;
 }
 
-.inputText {
-    float: right;
-    text-align: right;
-    margin-right: 22px;
-    margin-top: 11px;
-    font-size: 15px;
+.alert {
+  margin: 20px 0 30px;
 }
 
-.line {
-    width: 100%;
-    height: 1px;
-    background-color: gainsboro;
-    margin-top: 1px;
+.alert .alert-title {
+  font-weight: 400;
+  font-size: 16px;
+  color: #000;
+  margin-bottom: 10px;
 }
 
-/*按钮*/
-.loginBtn {
-    width: 80%;
-    margin-top: 35px;
+.alert-desc {
+  display: block;
+  list-style: disc inside none;
 }
 
-.goRegistBtn {
-    width: 80%;
-    margin-top: 15px;
+.alert .alert-text {
+  display: list-item;
+  text-align: -webkit-match-parent;
+  font-size: 14px;
+  color: #999;
+}
+
+.logged {
+  margin-top: 100px;
+}
+
+.logged .logged-icon {
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 20px auto;
+}
+
+.logged .logged-text {
+  font-size: 14px;
+  color: #000;
+  text-align: center;
+  margin: 10px 0;
 }

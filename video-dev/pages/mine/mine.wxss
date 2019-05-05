@@ -9,6 +9,16 @@ page {
     align-items: center;
 }
 
+.header {
+  display: block;
+  margin-top: 20rpx;
+}
+
+.index {
+  width: 60rpx;
+  height: 60rpx; 
+  margin-right: 520rpx;
+}
 
 .container-row {
     display: flex;
@@ -18,29 +28,52 @@ page {
 }
 
 .info-items {
-    margin-left: 30px;
+    margin-right: 25rpx;
 }
 
 .face {
     width: 180rpx;
     height: 180rpx;
     border-radius: 50%;
-    margin-top: 20px;
+    margin-top: 20rpx;
 }
 
 .nickname {
-    margin-top: 5px;
-    font-weight: bold;
-    font-size: 18px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+  font-weight: bold;
+  font-size: 18px;
+  align-items: center;
 }
 
-.logout {
-    margin-top: 3px;
-    float: right;
+.nickLabel {
+  margin-left: 2rpx;
+}
+
+.uploadbtn {
+  margin-top: 10rpx;
+  margin-bottom: 2rpx;
+  width: 90%;
+}
+
+.image {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.iconImage {
+  width: 50rpx;
+  height: 50rpx; 
+}
+
+.iconLabel {
+  margin-right: 30rpx;
 }
 
 .follow {
-    margin-top: 3px;
+    margin-top: 20rpx;
 }
 
 .line {
@@ -53,7 +86,7 @@ page {
 .container-video {
     display: flex;
     flex-direction: row;
-    margin-top: 20px;
+    margin-top: 10px;
     text-align: center;
     border: solid 1px;
     line-height: 30px;

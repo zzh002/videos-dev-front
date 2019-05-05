@@ -7,7 +7,10 @@ Page({
     faceUrl: "../resource/images/noneface.png",
     isMe: true,
     isFollow: false,
-
+    gender: 0,
+    country: "",
+    province: "",
+    city: "",
 
     videoSelClass: "video-info",
     isSelectedWork: "video-info-selected",
@@ -17,14 +20,17 @@ Page({
     myVideoList: [],
     myVideoPage: 1,
     myVideoTotal: 1,
+    myVideoRecords: 0,
 
     likeVideoList: [],
     likeVideoPage: 1,
     likeVideoTotal: 1,
+    likeVideoRecords: 0,
 
     followVideoList: [],
     followVideoPage: 1,
     followVideoTotal: 1,
+    followVideoRecords: 0,
 
     myWorkFalg: false,
     myLikesFalg: true,
@@ -75,7 +81,7 @@ Page({
           var userInfo = res.data.data;
           var faceUrl = "../resource/images/noneface.png";
           if (userInfo.faceImage != null && userInfo.faceImage != '' && userInfo.faceImage != undefined) {
-            faceUrl = serverUrl + userInfo.faceImage;
+            faceUrl = userInfo.faceImage;
           }
 
 
@@ -85,7 +91,11 @@ Page({
             followCounts: userInfo.followCounts,
             receiveLikeCounts: userInfo.receiveLikeCounts,
             nickname: userInfo.nickname,
-            isFollow: userInfo.follow
+            isFollow: userInfo.follow,
+            gender: userInfo.gender,
+            country: userInfo.country,
+            province: userInfo.province,
+            city: userInfo.city
           });
         } else if (res.data.status == 502) {
           wx.showToast({
@@ -160,7 +170,17 @@ Page({
     })
   },
 
+  back: function () {
+    wx.redirectTo({
+      url: '../index/index',
+    })
+  },
 
+  showSearch: function () {
+    wx.navigateTo({
+      url: '../searchVideo/searchVideo',
+    })
+  },
 
   logout: function () {
     // var user = app.userInfo;
@@ -172,7 +192,7 @@ Page({
     });
     // 调用后端
     wx.request({
-      url: serverUrl + '/logout?userId=' + user.id,
+      url: serverUrl + '/wXLogin/logout?userId=' + user.id,
       method: "POST",
       header: {
         'content-type': 'application/json' // 默认值
@@ -399,6 +419,7 @@ Page({
           myVideoPage: page,
           myVideoList: newVideoList.concat(myVideoList),
           myVideoTotal: res.data.data.total,
+          myVideoRecords: res.data.data.records,
           serverUrl: app.serverUrl
         });
       }
@@ -429,6 +450,7 @@ Page({
           likeVideoPage: page,
           likeVideoList: newVideoList.concat(likeVideoList),
           likeVideoTotal: res.data.data.total,
+          likeVideoRecords: res.data.data.records,
           serverUrl: app.serverUrl
         });
       }
@@ -459,6 +481,7 @@ Page({
           followVideoPage: page,
           followVideoList: newVideoList.concat(followVideoList),
           followVideoTotal: res.data.data.total,
+          followVideoRecords: res.data.data.records,
           serverUrl: app.serverUrl
         });
       }
@@ -501,7 +524,7 @@ Page({
       var currentPage = this.data.myVideoPage;
       var totalPage = this.data.myVideoTotal;
       // 获取总页数进行判断，如果当前页数和总页数相等，则不分页
-      if (currentPage === totalPage) {
+      if (currentPage >= totalPage) {
         wx.showToast({
           title: '已经没有视频啦...',
           icon: "none"
@@ -512,9 +535,9 @@ Page({
       this.getMyVideoList(page);
     } else if (!myLikesFalg) {
       var currentPage = this.data.likeVideoPage;
-      var totalPage = this.data.myLikesTotal;
+      var totalPage = this.data.likeVideoTotal;
       // 获取总页数进行判断，如果当前页数和总页数相等，则不分页
-      if (currentPage === totalPage) {
+      if (currentPage >= totalPage) {
         wx.showToast({
           title: '已经没有视频啦...',
           icon: "none"
@@ -527,7 +550,7 @@ Page({
       var currentPage = this.data.followVideoPage;
       var totalPage = this.data.followVideoTotal;
       // 获取总页数进行判断，如果当前页数和总页数相等，则不分页
-      if (currentPage === totalPage) {
+      if (currentPage >= totalPage) {
         wx.showToast({
           title: '已经没有视频啦...',
           icon: "none"

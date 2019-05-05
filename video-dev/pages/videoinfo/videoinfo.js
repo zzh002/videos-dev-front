@@ -23,7 +23,11 @@ Page({
     commentDetailLists: [[]],
 
 
-    placeholder: "留下你的精彩评论吧"
+    placeholder: "留下你的精彩评论吧",
+    marquee: 0,   //每次移动X坐标
+    windowWidth: 0,     //小程序宽度
+    maxScroll: 0,      //文本移动至最左侧宽度及文本宽度
+    str: ""
   },
 
   videoCtx: {},
@@ -78,10 +82,41 @@ Page({
     if (focus == "true") {
       me.showModal();
     }
+
+    var w = wx.getSystemInfoSync().windowWidth;
+    var str = '@' + me.data.videoInfo.name + ' - ' + me.data.videoInfo.author;
+    me.setData({
+      marquee: 30,
+      str: str
+    });
+    me.data.maxScroll = str.length * 12;
+    me.data.windowWidth = w/2;
+    me.scrolltxt();
   },
+
+  scrolltxt: function () {
+    var me = this;
+    var d = me.data;
+
+    var interval = setInterval(function () {
+      var next = d.marquee - 1; //每次移动距离
+      if (next < 0 && Math.abs(next) > d.maxScroll) {
+        next = d.windowWidth;
+        clearInterval(interval);
+        me.scrolltxt();
+      }
+      me.setData({
+        marquee: next
+      });
+    }, 50);
+  },
+
 
   onPlay: function() {
     var me = this;
+    wx.showLoading({
+      title: '...',
+    })
     var videoContext = wx.createVideoContext("myVideo", me);
     var isPlay = me.data.isPlay;
     if (isPlay) {
@@ -95,7 +130,7 @@ Page({
         isPlay: true
       })
     }
-    
+    wx.hideLoading();
   },
 
   onShow: function () {

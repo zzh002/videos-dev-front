@@ -1,92 +1,101 @@
-const app = getApp()
-
+var app = getApp();
+var API_URL = app.serverUrl + '/wXLogin/decodeUserInfo';
 Page({
   data: {
+    logo: "../resource/images/logo.png",
+    title: "趣味视频",
+    logged: false
   },
-
-  onLoad: function (params) {
+  onLoad: function () {
     var me = this;
-    var redirectUrl = params.redirectUrl;
-    // debugger;
-    if (redirectUrl != null && redirectUrl != undefined && redirectUrl != '') {
-      redirectUrl = redirectUrl.replace(/#/g, "?");
-      redirectUrl = redirectUrl.replace(/@/g, "=");
-
-      me.redirectUrl = redirectUrl;
-    }
-  },
-
-  // 登录  
-  doLogin: function (e) {
-    var me = this;
-    var formObject = e.detail.value;
-    var username = formObject.username;
-    var password = formObject.password;
-    // 简单验证
-    if (username.length == 0 || password.length == 0) {
-      wx.showToast({
-        title: '用户名或密码不能为空',
-        icon: 'none',
-        duration: 3000
+    var userInfo = app.getGlobalUserInfo();
+    if (userInfo != null && userInfo != "" && userInfo != undefined) {
+      me.setData({
+        logged: true
       })
-    } else {
-      var serverUrl = app.serverUrl;
-      wx.showLoading({
-        title: '请等待...',
-      });
-      // 调用后端
-      wx.request({
-        url: serverUrl + '/login',
-        method: "POST",
-        data: {
-          username: username,
-          password: password
-        },
-        header: {
-          'content-type': 'application/json' // 默认值
-        },
-        success: function (res) {
-          console.log(res.data);
-          wx.hideLoading();
-          if (res.data.status == 200) {
-            // 登录成功跳转 
-            wx.showToast({
-              title: '登录成功',
-              icon: 'success',
-              duration: 2000
-            });
-            // app.userInfo = res.data.data;
-            // fixme 修改原有的全局对象为本地缓存
-            app.setGlobalUserInfo(res.data.data);
-            // 页面跳转
+    }
+    
+  },
+  login: function (e) {
+    wx.showLoading({
+      title: '登陆中...',
+    });
+    var me = this;
+    wx.login({
+      success: function (r) {
+        var code = r.code;//登录凭证  
+        console.log(code)
+        if (code) {
+          //2、调用获取用户信息接口  
+          wx.getUserInfo({
+            lang: "zh_CN",
+            success: function (res) {
+              console.log({ encryptedData: res.encryptedData, iv: res.iv, code: code });
+              //3.请求自己的服务器，解密用户信息 获取unionId等加密信息  
+              wx.request({
+                url: API_URL,//自己的服务接口地址  
+                method: 'POST',
+                header: {
+                  'content-type': 'application/x-www-form-urlencoded'
+                },
+                data: { 
+                  encryptedData: res.encryptedData,
+                  iv: res.iv,
+                  code: code
+                },
+                success: function (res) {
 
-            var redirectUrl = me.redirectUrl;
-            if (redirectUrl != null && redirectUrl != undefined && redirectUrl != '') {
-              wx.redirectTo({
-                url: redirectUrl,
+                  //4.解密成功后 获取自己服务器返回的结果  
+                  if (res.data.status == 200) {
+                    var userInfo_ = res.data.data;
+                    app.setGlobalUserInfo(userInfo_);
+                    console.log(userInfo_);
+                    wx.hideLoading();
+                    wx.redirectTo({
+                      url: '../mine/mine',
+                    })
+                  } else {
+                    wx.showToast({
+                      title: '出错了~~',
+                      icon: "none"
+                    })
+                    console.log('解密失败')
+                  }
+
+                },
+                fail: function () {
+                  wx.showToast({
+                    title: '出错了~~',
+                    icon: "none"
+                  })
+                  console.log('系统错误')
+                }
               })
-            } else {
-              wx.redirectTo({
-                url: '../mine/mine',
+            },
+            fail: function () {
+              wx.showToast({
+                title: '出错了~~',
+                icon: "none"
               })
+              console.log('获取用户信息失败')
             }
-            
-          } else if (res.data.status == 500) {
-            // 失败弹出框
-            wx.showToast({
-              title: res.data.msg,
-              icon: 'none',
-              duration: 3000
-            })
-          }
-        }
-      })
-    }
-  },
+          })
 
-  goRegistPage:function() {
-    wx.redirectTo({
-      url: '../userRegist/regist',
+        } else {
+          wx.showToast({
+            title: '出错了~~',
+            icon: "none"
+          })
+          console.log('获取用户登录态失败！' + r.errMsg)
+        }
+      },
+      fail: function () {
+        wx.showToast({
+          title: '出错了~~',
+          icon: "none"
+        })
+        console.log('登陆失败')
+      }
     })
   }
 })

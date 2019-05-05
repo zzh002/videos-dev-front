@@ -32,6 +32,6 @@ App({
   },
   globalData: {
     userInfo: null,
-    baseUrl: 'http://172.23.7.125:8080/videos'
+    baseUrl: 'http://127.0.0.1:8080/videos'
   }
 })
